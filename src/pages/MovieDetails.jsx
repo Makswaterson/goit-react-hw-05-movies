@@ -29,7 +29,6 @@ const MovieDetails = () => {
   console.log(movie);
   return (
     <>
-      <h2>hello moviedetails</h2>
       <MovieInfo movie={movie} />
     </>
   );
