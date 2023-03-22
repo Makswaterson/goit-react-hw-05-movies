@@ -11,11 +11,13 @@ export async function getSearchMovies(query) {
   const { data } = await axios.get(
     `/search/movie?api_key=${KEY}&query=${query}&page=1`
   );
+
   return data;
 }
 
 export async function getMovieDetails(movie_id) {
   const { data } = await axios.get(`movie/{movie_id}?api_key=${KEY}`);
+  console.log(data);
   return data;
 }
 export async function getMovieCredits(movie_id) {
