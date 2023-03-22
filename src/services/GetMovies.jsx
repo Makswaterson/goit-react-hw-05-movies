@@ -21,6 +21,7 @@ export async function getMovieDetails(movie_id) {
 }
 export async function getMovieCredits(movie_id) {
   const { data } = await axios.get(`movie/${movie_id}/credits?api_key=${KEY}`);
+  console.log(data);
   return data;
 }
 export async function getMovieReviews(movie_id) {

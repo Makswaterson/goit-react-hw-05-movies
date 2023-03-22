@@ -10,7 +10,6 @@ function Home() {
       try {
         const { results } = await getTrendingMovies();
         setMovies(results);
-        console.log(results);
       } catch (error) {
         console.log(error);
       }

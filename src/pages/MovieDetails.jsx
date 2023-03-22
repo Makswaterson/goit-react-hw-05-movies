@@ -1,14 +1,14 @@
 import { useState, useEffect, Suspense } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import { getMovieDetails } from '../services/GetMovies';
 import MovieInfo from '../components/MovieItem/MovieItem';
+import { Loader } from '../components/Loader/Loader';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { moviesId } = useParams();
-  console.log(moviesId);
 
   useEffect(() => {
     setLoading(true);
@@ -16,7 +16,6 @@ const MovieDetails = () => {
       try {
         const response = await getMovieDetails(moviesId);
         setMovie(response);
-        console.log(response);
       } catch (error) {
         setError(error);
       } finally {
@@ -26,10 +25,22 @@ const MovieDetails = () => {
     movieDetailFetch();
   }, [moviesId]);
 
-  console.log(movie);
   return (
     <>
+      {error && <p>Sorry try another film</p>}
+      {loading && <Loader />}
       <MovieInfo movie={movie} />
+      <ul>
+        <li>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li>
+          <Link to="reviews">Reviews</Link>
+        </li>
+      </ul>
+      <Suspense>
+        <Outlet fallback={<Loader />} />
+      </Suspense>
     </>
   );
 };
