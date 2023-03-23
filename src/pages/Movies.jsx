@@ -32,6 +32,7 @@ const Movies = () => {
   const visibleMovies = movies.filter(movie =>
     movie.original_title.toLowerCase().includes(value.toLowerCase())
   );
+  console.log(visibleMovies);
 
   const updateQueryString = query => {
     const nextParams = query !== '' ? { query } : {};
@@ -41,8 +42,12 @@ const Movies = () => {
   return (
     <section>
       {loading && <Loader />}
-      {error && <p>Sorry,try to find something else</p>}
-      <SearchBox value={value} onSubmit={updateQueryString} />
+      {error !== null && <p>Sorry,there is no movies</p>}
+      <SearchBox
+        value={value}
+        onSubmit={updateQueryString}
+        onChange={visibleMovies}
+      />
       {visibleMovies.length > 0 ? (
         <ul>
           {visibleMovies.map(({ id, title }) => (
@@ -54,7 +59,7 @@ const Movies = () => {
           ))}
         </ul>
       ) : (
-        <p>Sorry,there is no movies</p>
+        <p>Try to find something!</p>
       )}
     </section>
   );

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const SearchBox = ({ onSubmit }) => {
+const SearchBox = ({ value, onSubmit, onChange }) => {
   const [searchInput, setSearchInput] = useState('');
 
   const onFormSubmit = e => {
