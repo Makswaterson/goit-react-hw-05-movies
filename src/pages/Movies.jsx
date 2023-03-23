@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import SearchBox from '../components/SearchBox/SearchBox';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { getSearchMovies } from '../services/GetMovies';
+import { Loader } from 'components/Loader/Loader';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -29,9 +30,10 @@ const Movies = () => {
     searchFetch();
   }, [value]);
 
-  //   const visibleMovies = movies.filter(movie =>
-  //     movie.name.toLowerCase().includes(value.toLowerCase())
-  //   );
+  // const visibleMovies = movies.filter(movie =>
+  //   movie.name.toLowerCase().includes(value.toLowerCase())
+  // );
+
   const updateQueryString = query => {
     const nextParams = query !== '' ? { query } : {};
     setSearchParams(nextParams);
@@ -39,16 +41,22 @@ const Movies = () => {
 
   return (
     <section>
+      {loading && <Loader />}
+      {error && <p>Sorry,try to find something else</p>}
       <SearchBox value={value} onChange={updateQueryString} />
-      <ul>
-        {movies.map(({ id, title }) => (
-          <li key={id}>
-            <Link to={`${id}`} state={{ from: location }}>
-              <p>{title}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {movies.length > 0 ? (
+        <ul>
+          {movies.map(({ id, title }) => (
+            <li key={id}>
+              <Link to={`${id}`} state={{ from: location }}>
+                <p>{title}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Sorry,there is no movies</p>
+      )}
     </section>
   );
 };
