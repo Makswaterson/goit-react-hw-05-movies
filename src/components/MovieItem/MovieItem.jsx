@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useRef } from 'react';
 
 const MovieInfo = ({
   movie: {
@@ -11,22 +12,25 @@ const MovieInfo = ({
   },
 }) => {
   const location = useLocation();
-  const noImage = '/src/Images/No_Image_Available.jpg';
-  const image = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-
+  const backLinkLocationRef = useRef(location.state?.from ?? '/movies');
+  //   console.log(backLinkLocationRef);
+  //   console.log(location);
   return (
     <div>
-      <Link>
-        <button type="button">Return</button>
+      <Link to={backLinkLocationRef.current}>
+        <button type="button">Return back</button>
       </Link>
 
       <div>
-        <img src={image} alt={title} width="200px" />
+        <img
+          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          alt={title}
+          width="200px"
+        ></img>
       </div>
       <section>
         <h2>
-          {title}
-          {release_date}
+          {title}({release_date})
         </h2>
         <span>User score:{Math.round(vote_average * 10)}%</span>
         <h3>Overview</h3>

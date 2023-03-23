@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, NavLink, Outlet } from 'react-router-dom';
 import { getMovieDetails } from '../services/GetMovies';
 import MovieInfo from '../components/MovieItem/MovieItem';
 import { Loader } from '../components/Loader/Loader';
@@ -32,10 +32,10 @@ const MovieDetails = () => {
       <MovieInfo movie={movie} />
       <ul>
         <li>
-          <Link to="cast">Cast</Link>
+          <NavLink to="cast">Cast</NavLink>
         </li>
         <li>
-          <Link to="reviews">Reviews</Link>
+          <NavLink to="reviews">Reviews</NavLink>
         </li>
       </ul>
       <Suspense>
