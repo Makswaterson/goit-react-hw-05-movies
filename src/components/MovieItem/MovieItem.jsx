@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 const MovieInfo = ({
   movie: {
@@ -13,8 +14,7 @@ const MovieInfo = ({
 }) => {
   const location = useLocation();
   const backLinkLocationRef = useRef(location.state?.from ?? '/movies');
-  //   console.log(backLinkLocationRef);
-  //   console.log(location);
+
   return (
     <div>
       <Link to={backLinkLocationRef.current}>
@@ -42,3 +42,14 @@ const MovieInfo = ({
   );
 };
 export default MovieInfo;
+
+MovieInfo.propTypes = {
+  movie: PropTypes.shape({
+    poster_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    vote_average: PropTypes.string.isRequired,
+    release_date: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
+    genres: PropTypes.array.isRequired,
+  }),
+};
