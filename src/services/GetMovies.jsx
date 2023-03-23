@@ -11,7 +11,6 @@ export async function getSearchMovies(query) {
   const { data } = await axios.get(
     `/search/movie?api_key=${KEY}&query=${query}&page=1`
   );
-  console.log(data);
   return data;
 }
 
