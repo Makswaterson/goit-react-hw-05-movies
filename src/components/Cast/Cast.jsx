@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCredits } from 'services/GetMovies';
 import defaultImage from '../../Images/No_Image_Available.jpg';
+import { List } from './Cast.styled';
 
 const Cast = () => {
   const [credits, setCredits] = useState([]);
@@ -21,14 +22,14 @@ const Cast = () => {
 
   return (
     <div>
-      <ul>
+      <List>
         {credits.map(({ id, name, profile_path, character }) => (
           <li key={id}>
             {profile_path !== null ? (
               <img
                 src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
                 alt={name}
-                width="150"
+                width="300"
               ></img>
             ) : (
               <div>
@@ -41,7 +42,7 @@ const Cast = () => {
             <p>{character}</p>
           </li>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };

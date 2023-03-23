@@ -3,6 +3,7 @@ import SearchBox from '../components/SearchBox/SearchBox';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { getSearchMovies } from '../services/GetMovies';
 import { Loader } from 'components/Loader/Loader';
+import { List, Links } from './Movies.styled';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -49,15 +50,15 @@ const Movies = () => {
         onChange={visibleMovies}
       />
       {visibleMovies.length > 0 ? (
-        <ul>
+        <List>
           {visibleMovies.map(({ id, title }) => (
             <li key={id}>
-              <Link to={`${id}`} state={{ from: location }}>
+              <Links to={`${id}`} state={{ from: location }}>
                 <p>{title}</p>
-              </Link>
+              </Links>
             </li>
           ))}
-        </ul>
+        </List>
       ) : (
         <p>Try to find something!</p>
       )}

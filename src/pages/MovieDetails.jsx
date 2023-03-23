@@ -1,8 +1,9 @@
 import { useState, useEffect, Suspense } from 'react';
-import { useParams, NavLink, Outlet } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 import { getMovieDetails } from '../services/GetMovies';
 import MovieInfo from '../components/MovieItem/MovieItem';
 import { Loader } from '../components/Loader/Loader';
+import { NavLinks, List } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState([]);
@@ -30,14 +31,14 @@ const MovieDetails = () => {
       {error && <p>Sorry try another film</p>}
       {loading && <Loader />}
       <MovieInfo movie={movie} />
-      <ul>
+      <List>
         <li>
-          <NavLink to="cast">Cast</NavLink>
+          <NavLinks to="cast">Cast</NavLinks>
         </li>
         <li>
-          <NavLink to="reviews">Reviews</NavLink>
+          <NavLinks to="reviews">Reviews</NavLinks>
         </li>
-      </ul>
+      </List>
       <Suspense>
         <Outlet fallback={<Loader />} />
       </Suspense>

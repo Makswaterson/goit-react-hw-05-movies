@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Btn } from '../MovieItem/MovieItem.styled';
+import { Input } from './SearchBox.styled';
 
 const SearchBox = ({ value, onSubmit, onChange }) => {
   const [searchInput, setSearchInput] = useState('');
@@ -12,14 +14,14 @@ const SearchBox = ({ value, onSubmit, onChange }) => {
 
   return (
     <form onSubmit={onFormSubmit}>
-      <input
+      <Input
         type="text"
         placeholder="Please enter movies name"
         value={searchInput}
         name="name"
         onChange={e => setSearchInput(e.target.value)}
       />
-      <button type="submit">Search</button>
+      <Btn type="submit">Search</Btn>
     </form>
   );
 };
@@ -28,7 +30,6 @@ export default SearchBox;
 
 SearchBox.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };
 

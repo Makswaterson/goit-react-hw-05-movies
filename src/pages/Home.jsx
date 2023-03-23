@@ -25,7 +25,7 @@ function Home() {
 
   return (
     <>
-      <h1>Trending Today</h1>
+      <h1>Trending Today:</h1>
       {loading && <Loader />}
       <MovieList movies={movies} />
     </>
